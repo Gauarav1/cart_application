@@ -1,4 +1,4 @@
 module.exports = {
-    success:"Success",
-    failed :"Failed"
+    success: "Success",
+    failed: "Failed"
 }

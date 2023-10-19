@@ -4,6 +4,8 @@ const { success, failed } = require("../util/constant");
 const logger = require("../util/logging");
 const log = logger(new Date + `product.controller.js`);
 
+
+
 const productCreate = async (req, res) => {
     try {
         const { productName, price, weight, description, categoryId } = req.body;
@@ -45,7 +47,6 @@ const productCreate = async (req, res) => {
         }
     }
 }
-
 const productById = async (req, res) => {
     try {
         const { _id } = req.params;
@@ -82,7 +83,6 @@ const productById = async (req, res) => {
         res.send(t);
     }
 }
-
 const productCategory = async (req, res) => {
     try {
         const { _id } = req.params;
@@ -96,8 +96,8 @@ const productCategory = async (req, res) => {
                     as: "data"
                 },
             },
-            { 
-                $match: { _id: new mongoose.Types.ObjectId(_id) } 
+            {
+                $match: { _id: new mongoose.Types.ObjectId(_id) }
             },
             {
                 $project: {
@@ -106,7 +106,7 @@ const productCategory = async (req, res) => {
                     price: 1,
                     weight: 1,
                     description: 1,
-                    categoryId: 1, 
+                    categoryId: 1,
                     data: {
                         _id: 1,
                         categoryName: 1,
@@ -148,6 +148,8 @@ const productCategory = async (req, res) => {
         }
     }
 }
+
+
 module.exports = {
     productCreate,
     productById,

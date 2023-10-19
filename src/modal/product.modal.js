@@ -18,12 +18,13 @@ const productSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    categoryId:{
-        type:mongoose.Types.ObjectId,
-        require:true
+    categoryId: {
+        type: mongoose.Types.ObjectId,
+        require: true
     }
 
 
 });
+
 const productModal = mongoose.model(`Products`, productSchema);
 module.exports = productModal;

@@ -2,7 +2,7 @@ const joi = require("joi");
 const { success, failed } = require("../util/constant");
 const jToken = require("jsonwebtoken");
 
-/* User Validation */
+
 
 const userVal = (req, res, next) => {
     const data = req.body;
@@ -53,12 +53,6 @@ const tokenVal = (req, res, next) => {
         res.send(err);
     }
 }
-
-
-
-
-/* Category Validation */
-
 
 
 module.exports = {
