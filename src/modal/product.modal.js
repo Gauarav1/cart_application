@@ -1,4 +1,3 @@
-const { object } = require("joi");
 const mongoose = require("mongoose");
 
 const productSchema = new mongoose.Schema({
@@ -24,6 +23,8 @@ const productSchema = new mongoose.Schema({
     }
 
 
+},{
+    timestamps:true
 });
 
 const productModal = mongoose.model(`Products`, productSchema);

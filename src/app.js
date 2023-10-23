@@ -9,6 +9,7 @@ const route = require("./route/index");
 app.use(route.userRouter);
 app.use(route.productRouter);
 app.use(route.categoryRouter);
+app.use(route.cartRouter);
 
 /* MONGO DB Connection */
 const dbConnection = require("./config/database");

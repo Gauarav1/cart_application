@@ -1,11 +1,13 @@
 const joi = require("joi");
-const { success, failed } = require("../util/constant");
+const { failed } = require("../util/constant");
 
-
-const catVal = (req, res, next) => {
+const cartVal = (req, res, next) => {
     const data = req.body;
-    const joiSchema = joi.object().keys({
-        categoryName:joi.string().required()
+    const joiSchema = joi.object().keys({ 
+        productId: joi.string().required(),
+        quantity: joi.number().required(),
+        price: joi.number().required(),
+
     })
     const validationData = joiSchema.validate(data);
     if (validationData.error) {
@@ -19,6 +21,7 @@ const catVal = (req, res, next) => {
     }
     next();
 }
+
 module.exports = {
-    catVal
+    cartVal
 }

@@ -1,7 +1,5 @@
 const joi = require("joi");
 const { success, failed } = require("../util/constant");
-const jToken = require("jsonwebtoken");
-
 
 
 const userVal = (req, res, next) => {
@@ -25,37 +23,27 @@ const userVal = (req, res, next) => {
     }
     next();
 }
-const tokenVal = (req, res, next) => {
-    try {
-        const token = req.headers.authorization;
-        if (!token) {
-            let t = {
-                msg: "Unauthorized User",
-                status: failed,
-                code: 400
-            }
-            return res.send(t);
+const logInVal = (req,res, next) =>{
+    const data = req.body;
+    const joiSchema = joi.object().keys({
+        email: joi.string().email().required(),
+        password: joi.string().required()
+    })
+    const validationData = joiSchema.validate(data);
+    if (validationData.error) {
+        let t = {
+            msg: validationData.error.details[0].message,
+            status: failed,
+            code: 400,
+            err: validationData.error
         }
-        const data = jToken.decode(token);
-        if (data) {
-            next();
-        }
-        else {
-            let t = {
-                msg: "Error in Decoding Token",
-                status: failed,
-                code: 400
-            }
-            return res.send(t);
-        }
+        return res.send(t);
     }
-    catch (err) {
-        res.send(err);
-    }
+    next();
 }
 
 
 module.exports = {
     userVal,
-    tokenVal
+    logInVal,
 }

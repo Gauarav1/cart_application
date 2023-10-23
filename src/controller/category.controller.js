@@ -1,3 +1,4 @@
+const { default: mongoose } = require("mongoose");
 const categoryModal = require("../modal/category.modal");
 const { success, failed } = require("../util/constant");
 const logger = require("../util/logging");
@@ -18,24 +19,24 @@ const categoryCreate = async (req, res) => {
             }
             res.send(t);
         }
-        else{
+        else {
             let t = {
                 msg: "Error in Creating Category",
                 status: failed,
-                code :400,
-                data :{},
+                code: 400,
+                data: {},
                 err
             }
             res.send(t);
         }
     }
-    catch(err) {
+    catch (err) {
         log.info(` Error in Creating Category, err:${err}`);
         let t = {
             msg: "Error in Creating Category",
             status: failed,
-            code :400,
-            data :{},
+            code: 400,
+            data: {},
             err
         }
         res.send(t);
@@ -54,20 +55,20 @@ const getAllProducts = async (req, res) => {
                     as: "Products"
                 },
             },
-            { 
-                $match: { _id: new mongoose.Types.ObjectId(_id) } 
+            {
+                $match: { _id: new mongoose.Types.ObjectId(_id) }
             },
             {
                 $project: {
                     _id: 1,
                     categoryName: 1,
                     Products: {
-                        _id: 0,
+                        _id: 1,
                         productName: 1,
                         price: 1,
                         weight: 1,
                         description: 1,
-                        categoryId: 1,  
+                        categoryId: 1,
                     }
                 }
             }
