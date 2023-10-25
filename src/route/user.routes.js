@@ -7,6 +7,7 @@ const route = require("express").Router();
 route.post("/user/registration", [userVal], userController.createUser);
 route.post("/user/login", [logInVal], userController.userLogin);
 route.post("/user/info", [jwtToken], userController.userInfo);
+route.get("/user/get/info",userController.getAllUser);
 
 
 module.exports = route; 

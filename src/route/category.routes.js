@@ -5,7 +5,7 @@ const route = require("express").Router();
 
 
 route.post("/category", [jwtToken, catVal], categoryController.categoryCreate);
-route.get("/category/products/:_id", [jwtToken], categoryController.getAllProducts)
+route.get("/category/products/:_id", [jwtToken], categoryController.categoryProducts)
 
 
 module.exports = route;
