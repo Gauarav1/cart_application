@@ -42,7 +42,7 @@ const categoryCreate = async (req, res) => {
         res.send(t);
     }
 }
-const getAllProducts = async (req, res) => {
+const categoryProducts = async (req, res) => {
     try {
         const { _id } = req.params;
         // console.log(id);
@@ -109,5 +109,5 @@ const getAllProducts = async (req, res) => {
 
 module.exports = {
     categoryCreate,
-    getAllProducts
+    categoryProducts
 }

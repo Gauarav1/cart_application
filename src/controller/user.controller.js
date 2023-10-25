@@ -113,10 +113,50 @@ const userInfo = async (req, res) => {
 
     }
 }
-
-
-module.exports = {
-    createUser,
-    userLogin,
-    userInfo
+const getAllUser = async (req, res) => {
+    try {
+        const { page, perPage } = req.query;
+        const skip = (page - 1) * perPage;
+        const count = await userModal.countDocuments();
+        const data = await userModal.find().limit(perPage).skip(skip).sort({
+            "name": 1
+        });
+        if (result) {
+            let t = {
+                msg: "List Of Users",
+                code: 200,
+                status: success,
+                count: count,
+                data: data
+            }
+            res.send(t);
+        }
+        else {
+            let t = {
+                msg: "Error in Getting Users",
+                code: 400,
+                status: failed,
+                data: {},
+                err
+            }
+            res.send(t);
+        }
+    }
+    catch (err) {
+        log.error(`Error in Finding Users, err:${err}`);
+        let t = {
+            msg: "Error in Getting Users",
+            code: 400,
+            status: failed,
+            data: {},
+            err
+        }
+        res.send(t);
+    }
 }
+    module.exports = {
+        createUser,
+        userLogin,
+        userInfo,
+        getAllUser
+    }

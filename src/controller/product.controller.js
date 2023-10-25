@@ -148,10 +148,44 @@ const productCategory = async (req, res) => {
         }
     }
 }
-
-
+const getAllProducts = async (req, res) => {
+    try{
+        const result = await productModal.find();
+        if(result){
+            let t = {
+                msg:"Products List",
+                code:200,
+                status:success,
+                list:result
+            }
+            res.send(t);
+        }
+        else{
+            let t = {
+                msg:"No Products",
+                code:400,
+                status:failed,
+                data  :{},
+                err
+            }
+            res.send(t);
+        }
+    }
+    catch(err){
+        log.error(`Error in Finding Products, err:${err}`);
+        let t = {
+            msg:"Error in Finding Products",
+            code:400,
+            status:failed,
+            data  :{},
+            err
+        }
+        res.send(t);
+    }
+}
 module.exports = {
     productCreate,
     productById,
-    productCategory
+    productCategory,
+    getAllProducts
 }
