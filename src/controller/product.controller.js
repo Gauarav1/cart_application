@@ -149,35 +149,35 @@ const productCategory = async (req, res) => {
     }
 }
 const getAllProducts = async (req, res) => {
-    try{
+    try {
         const result = await productModal.find();
-        if(result){
+        if (result) {
             let t = {
-                msg:"Products List",
-                code:200,
-                status:success,
-                list:result
+                msg: "Products List",
+                code: 200,
+                status: success,
+                list: result
             }
             res.send(t);
         }
-        else{
+        else {
             let t = {
-                msg:"No Products",
-                code:400,
-                status:failed,
-                data  :{},
+                msg: "No Products",
+                code: 400,
+                status: failed,
+                data: {},
                 err
             }
             res.send(t);
         }
     }
-    catch(err){
+    catch (err) {
         log.error(`Error in Finding Products, err:${err}`);
         let t = {
-            msg:"Error in Finding Products",
-            code:400,
-            status:failed,
-            data  :{},
+            msg: "Error in Finding Products",
+            code: 400,
+            status: failed,
+            data: {},
             err
         }
         res.send(t);

@@ -154,9 +154,9 @@ const getAllUser = async (req, res) => {
         res.send(t);
     }
 }
-    module.exports = {
-        createUser,
-        userLogin,
-        userInfo,
-        getAllUser
-    }
+module.exports = {
+    createUser,
+    userLogin,
+    userInfo,
+    getAllUser
+}

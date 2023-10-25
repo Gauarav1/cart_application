@@ -21,8 +21,8 @@ const userSchema = new mongoose.Schema({
         type: String,
         require: true
     }
-},{
-    timestamps:true
+}, {
+    timestamps: true
 })
 
 const userModal = mongoose.model(`user`, userSchema);

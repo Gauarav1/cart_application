@@ -46,60 +46,63 @@ const createOrder = async (req, res) => {
     }
 }
 const getOrder = async (req, res) => {
-    try{
-        const {_id} = req.params;
+    try {
+        const { _id } = req.params;
         const result = await orderModal.aggregate([
-        {
-            $lookup:{
-                from :"carts",
-                localField:"userId",
-                foreignField:"userId",
-                as:"orders"
+            {
+                $lookup: {
+                    from: "carts",
+                    localField: "userId",
+                    foreignField: "userId",
+                    as: "orders"
+                },
             },
-        },
-        { $match:{ _id : new mongoose.Types.ObjectId(_id)
-        }},
-        {
-            $project: {
-                _id :1,
-                userId:1,
-                cartId:1,
-                orders:{
-                    userId:1,
-                    productId:1,
-                    price:1,
-                    quantity:1
+            {
+                $match: {
+                    _id: new mongoose.Types.ObjectId(_id)
+                }
+            },
+            {
+                $project: {
+                    _id: 1,
+                    userId: 1,
+                    cartId: 1,
+                    orders: {
+                        userId: 1,
+                        productId: 1,
+                        price: 1,
+                        quantity: 1
+                    }
                 }
             }
-        }
         ])
-        if(result){
+        if (result) {
             let t = {
-                msg:"Orders Found Successfully",
-                code:200,
+                msg: "Orders Found Successfully",
+                code: 200,
                 status: success,
                 data: result
             }
             res.send(t);
         }
-        else{
-            let t={
-                msg:"Order not Found",
+        else {
+            let t = {
+                msg: "Order not Found",
                 code: 400,
                 status: failed,
-                data : {},
+                data: {},
                 err
             }
             res.send(t);
         }
     }
-    catch(err){
+    catch (err) {
         log.error(`Error in Finding Order , err:${err}`);
-        let t={
-            msg:"Error in finding Order",
+        let t = {
+            msg: "Error in finding Order",
             code: 400,
             status: failed,
-            data : {},
+            data: {},
             err
         }
         res.send(t);
