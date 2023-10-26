@@ -108,9 +108,46 @@ const getOrder = async (req, res) => {
         res.send(t);
     }
 }
-
+const orderByStatus = async (req, res) => {
+    try {
+        const { status } = req.query;
+        log.info(status);
+        const data = await orderModal.find({status: status});
+        if(data){
+            let t = {
+                msg:"All Delivered Orders",
+                code:200,
+                status:success,
+                data:data
+            }
+            res.send(t);
+        }
+        else{
+            let t = {
+                msg:`No Orders Found With Status:${status}`,
+                code:400,
+                status:failed,
+                data:{},
+                err
+            }
+            res.send(t);
+        }
+    }
+    catch (err) {
+        log.error(`Error In Finding Orders ,err:${err}`);
+        let t = {
+            msg:`Error In Finding Orders`,
+            code:400,
+            status:failed,
+            data:{},
+            err
+        }
+        res.send(t);
+    }
+}
 
 module.exports = {
     createOrder,
-    getOrder
+    getOrder,
+    orderByStatus
 }

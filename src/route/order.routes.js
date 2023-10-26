@@ -5,5 +5,6 @@ const route = require("express").Router();
 
 route.post("/order/create", [jwtToken], orderController.createOrder);
 route.get("/order/get/:_id", [jwtToken], orderController.getOrder);
+route.get("/order/status", [jwtToken], orderController.orderByStatus);
 
 module.exports = route;
