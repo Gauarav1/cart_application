@@ -183,9 +183,15 @@ const getAllProducts = async (req, res) => {
         res.send(t);
     }
 }
+
+
+const uploadImage = (req, res) => {
+    res.send(`Image Uploaded Successfully`);
+}
 module.exports = {
     productCreate,
     productById,
     productCategory,
-    getAllProducts
+    getAllProducts,
+    uploadImage
 }
